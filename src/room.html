@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presence Demo</title>
+  <style>
+    @import "https://unpkg.com/open-props";
+    @import "https://unpkg.com/open-props/normalize.min.css";
+    body {
+      cursor: -webkit-image-set(url(data:image/png;base64,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) 2x) 3 3, auto;
+    }
+    .message {
+      margin: var(--size-5);
+      box-shadow: var(--shadow-4);
+      inline-size: max-content;
+      max-inline-size: var(--max-inline-body);
+      padding-inline: var(--size-5);
+      padding-block: var(--size-4);
+      border-radius: var(--radius-conditional-2);
+      border: var(--border-size-1) solid var(--surface-3);
+      background: var(--surface-1);
+      line-height: var(--font-lineheight-4);
+    }
+    input[type="text"] {
+      box-shadow: var(--inner-shadow-3);
+    }
+    input[type="submit"] {
+      color: var(--blue-9);
+      border: var(--border-size-1) solid var(--blue-3);
+      background: var(--blue-2);
+      border-radius: var(--radius-conditional-2);
+    }
+    input[type="text"] + input[type="submit"] {
+      margin-inline-start: var(--size-2);
+    }
+    .cursor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      transition: transform 0.5s var(--ease-out-4);
+    }
+    .cursor .pointer {
+      margin: -1px 0 0 -1px;
+      stroke: none;
+      fill: var(--color);
+      transform: translate(-4px, -3px) rotate(-35deg);
+      filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, .4));
+    }
+    .label {
+      border-radius: 100px;
+      background: var(--color);
+      font-size: .75rem;
+      line-height: 1rem;
+      color: white;
+      font-weight: 500;
+      padding: .25rem .625rem;
+      white-space: nowrap;
+      align-items: center;
+      display: flex;
+      margin-left: 12px;
+    }
+  </style>
+</head>
+<body>
+<div class="message">
+  <h1>Presence Demo</h1>
+  <p>
+    This is a demo of the presence Durable Object which features:
+  </p>
+  <ul>
+    <li>Using functional programming with Durable Objects rather than classes</li>
+    <li>Displaying everyone in a room by mouse movement and name. A room can be any unique name such as a UUID or URL.</li>
+  </ul>
+  <div>
+    <p>Please let us know your name:</p>
+    <form onsubmit="event.preventDefault();setName(this.name.value);this.parentNode.remove()">
+      <input type="text" name="name" placeholder="Your name" autofocus>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+<template id="cursor">
+  <div class="cursor">
+    <svg class="pointer" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 17L9 2L16 17L9 14L2 17Z" stroke="white"/>
+    </svg>
+    <div class="label">Anonymous</div></div>
+</template>
+<script>
+const colors = ['#e6194b', '#3cb44b', '#4363d8', '#f58231', '#911eb4', '#f032e6', '#008080', '#e6beff', '#9a6324', '#800000', '#808000', '#000075', '#808080'];
+const unusedColors = new Set(colors);
+const cursorTemplate = document.getElementById('cursor');
+const cursors = {};
+let ws;
+
+addEventListener('mousemove', event => onMouseMove(event.clientX, event.clientY));
+addEventListener('mouseout', () => onMouseMove(-100, -100));
+
+function setName(name) {
+  send({ name });
+}
+
+function setPosition(position) {
+  send(position);
+}
+
+function addCursor(color) {
+  const cursor = cursorTemplate.content.cloneNode(true).firstElementChild;
+  cursor.style.setProperty('--color', color);
+  document.body.appendChild(cursor);
+  return cursor;
+}
+
+function moveCursor(cursor, { x, y }) {
+  if (x === -100) {
+    if (!cursor.style.display) cursor.style.display = 'none';
+  } else if (cursor.style.display) {
+    cursor.style.display = '';
+  }
+  cursor.style.transform = `translateX(${x}px) translateY(${y}px)`;
+}
+
+function labelCursor(cursor, label) {
+  cursor.querySelector('.label').textContent = label;
+}
+
+let position = null;
+function onMouseMove(x, y) {
+  if (!position) {
+    setTimeout(() => {
+      setPosition(position);
+      position = null;
+    }, 50);
+  }
+  position = { x, y };
+}
+
+function onMessage(event) {
+  try {
+    const data = JSON.parse(event.data);
+    Object.keys(data).forEach(id => {
+      const updates = data[id];
+      let cursor = cursors[id];
+      if (!cursors[id]) {
+        cursor = cursors[id] = addCursor(getNextColor());
+      }
+      if (updates === null) {
+        cursor.remove();
+        delete cursors[id];
+      } else {
+        if ('name' in updates) {
+          labelCursor(cursor, updates.name);
+        }
+        if ('x' in updates) {
+          moveCursor(cursor, updates);
+        }
+      }
+    });
+  } catch (err) {
+    console.error('Message Error:', err);
+  }
+}
+
+function getNextColor() {
+  const color = unusedColors.values().next().value;
+  unusedColors.delete(color);
+  if (unusedColors.size === 0) {
+    unusedColors.add(...colors);
+  }
+  return color;
+}
+
+function connect() {
+  if (ws) {
+    console.log('closed');
+    ws.close();
+  }
+  const url = new URL(location.href);
+  url.protocol = url.protocol === 'https:' ? 'wss:' : 'ws:';
+  url.searchParams.set('room', 'demo');
+  ws = new WebSocket(url);
+  ws.onmessage = onMessage;
+  ws.onerror = connect;
+  ws.onclose = connect;
+  ws.onopen = () => {
+    console.log('connected');
+  };
+}
+
+function send(data) {
+  if (ws.readyState === ws.OPEN) {
+    ws.send(JSON.stringify(data));
+  }
+}
+
+connect();
+</script>
+</body>
+</html>

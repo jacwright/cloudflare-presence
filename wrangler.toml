@@ -1,0 +1,6 @@
+name = "demo"
+main = "src/index.ts"
+compatibility_date = "2022-05-24"
+
+[durable_objects]
+bindings = [{name = "PRESENCE", class_name = "presence"}]
