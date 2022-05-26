@@ -7,7 +7,7 @@
 
 import { createId } from './id';
 
-const COLLECTION_PERIOD = 10; // milliseconds of colleting changes before broacasting them at once
+const COLLECTION_PERIOD = 50; // milliseconds of colleting changes before broacasting them at once
 
 // be fun to test the limits.
 export function createRoom(onRoomClose: () => void): Room {
