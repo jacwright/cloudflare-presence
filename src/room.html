@@ -74,6 +74,7 @@
     <li>Using functional programming with Durable Objects rather than classes</li>
     <li>Displaying everyone in a room by mouse movement and name. A room can be any unique name such as a UUID or URL.</li>
   </ul>
+  <p><a href="https://github.com/jacwright/cloudflare-presence">Source code on github</a>.</p>
   <div>
     <p>Please let us know your name:</p>
     <form onsubmit="event.preventDefault();setName(this.name.value);this.parentNode.remove()">
@@ -170,7 +171,7 @@ function getNextColor() {
   const color = unusedColors.values().next().value;
   unusedColors.delete(color);
   if (unusedColors.size === 0) {
-    unusedColors.add(...colors);
+    colors.forEach(unusedColors.add, unusedColors);
   }
   return color;
 }
