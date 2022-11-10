@@ -154,10 +154,10 @@ const elems = {
   totalMonth: document.getElementById('totalCostPerMonth'),
 };
 const cursors = {};
-const fixedCostPerHour = 12.50/1_000_000/1_000*128*60*60;
-const variableCost = 0.15/1_000_000;
+const fixedCostPerHour = 12.50/1_000_000/1_000*128*60*60; // $12.50/GB-s in 128MB-hours
+const variableCost = 0.15/1_000_000; // $0.15/million messages
 const hoursPerMonth = 24*365/12;
-const ourConnections = new Set();
+const ourConnections = new Set(); // Prevent other people jumping into the room from skewing the 4-person average we are tracking locally
 let ws;
 let start = 0;
 let count = 1;
