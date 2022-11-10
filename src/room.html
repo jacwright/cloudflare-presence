@@ -82,6 +82,9 @@
       <input type="submit" value="Submit">
     </form>
   </div>
+  <div>
+    Average cost: $<span id="hour">0.00</span>/hour $<span id="month">0.00</span>/month
+  </div>
 </div>
 
 <template id="cursor">
@@ -96,8 +99,15 @@
 const colors = ['#e6194b', '#3cb44b', '#4363d8', '#f58231', '#911eb4', '#f032e6', '#008080', '#e6beff', '#9a6324', '#800000', '#808000', '#000075', '#808080'];
 const unusedColors = new Set(colors);
 const cursorTemplate = document.getElementById('cursor');
+const hourElement = document.getElementById('hour');
+const monthElement = document.getElementById('month');
 const cursors = {};
+const fixedCostPerHour = 12.50/1_000_000/1_000*128*60*60;
+const variableCost = 0.15/1_000_000;
+const hoursPerMonth = 24*365/12;
 let ws;
+let start = 0;
+let count = 1;
 
 addEventListener('mousemove', event => onMouseMove(event.clientX, event.clientY));
 addEventListener('mouseout', () => onMouseMove(-100, -100));
@@ -141,7 +151,16 @@ function onMouseMove(x, y) {
   position = { x, y };
 }
 
+function onMessageSent() {
+  count += 4; // 4 people in a whiteboarding room
+  const hours = (Date.now() - start)/1000/60/60;
+  const costPerHour = (variableCost * count)/hours + fixedCostPerHour;
+  hourElement.innerText = Math.round(costPerHour * 1000)/1000;
+  monthElement.innerText = Math.round(costPerHour * hoursPerMonth * 1000)/1000;
+}
+
 function onMessage(event) {
+  onMessageSent();
   try {
     const data = JSON.parse(event.data);
     Object.keys(data).forEach(id => {
@@ -190,12 +209,14 @@ function connect() {
   ws.onclose = connect;
   ws.onopen = () => {
     console.log('connected');
+    start = Date.now();
   };
 }
 
 function send(data) {
   if (ws.readyState === ws.OPEN) {
     ws.send(JSON.stringify(data));
+    onMessageSent();
   }
 }
 
