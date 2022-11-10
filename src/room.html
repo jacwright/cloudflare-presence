@@ -219,8 +219,8 @@ function countMessage() {
   elems.fixedMonth.innerText = Math.round(fixedCostPerHour * hoursPerMonth * 1000) / 1000;
   elems.varHour.innerText = Math.round(varCostPerHour * 100000) / 100000;
   elems.varMonth.innerText = Math.round(varCostPerHour * hoursPerMonth * 1000) / 1000;
-  elems.totalHour.innerText = Math.round(totalCostPerHour * numParticipants * 100000) / 100000;
-  elems.totalMonth.innerText = Math.round(totalCostPerHour * numParticipants * hoursPerMonth * 1000) / 1000;
+  elems.totalHour.innerText = Math.round((varCostPerHour * numParticipants + fixedCostPerHour) * 100000) / 100000;
+  elems.totalMonth.innerText = Math.round((varCostPerHour * numParticipants + fixedCostPerHour) * hoursPerMonth * 1000) / 1000;
 }
 
 function onMessage(event) {
