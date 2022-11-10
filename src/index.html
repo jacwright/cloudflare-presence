@@ -24,6 +24,17 @@
       border: none;
     }
   </style>
+  <script>
+    const chars = ('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz').split('');
+    function uuid(length = 24) {
+      let id = '';
+      while (length--) {
+        id += chars[Math.random() * chars.length | 0];
+      }
+      return id;
+    }
+    if (!localStorage.clientId) localStorage.clientId = uuid();
+  </script>
 </head>
 <body>
 <iframe src="room.html"></iframe>

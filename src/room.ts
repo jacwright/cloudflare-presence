@@ -45,15 +45,15 @@ export function createRoom(onRoomClose: () => void): Room {
     const full = JSON.stringify(currentQueue);
     sockets.forEach((id, socket) => {
       try {
-        if (currentQueue[id]) {
-          if (ids.size > 1) {
-            const partial = { ...currentQueue };
-            delete partial[id];
-            socket.send(JSON.stringify(partial));
-          }
-        } else {
+        // if (currentQueue[id]) {
+        //   if (ids.size > 1) {
+        //     const partial = { ...currentQueue };
+        //     delete partial[id];
+        //     socket.send(JSON.stringify(partial));
+        //   }
+        // } else {
           socket.send(full);
-        }
+        // }
       } catch (e) {
         onClose(socket);
       }
@@ -113,6 +113,7 @@ export function createRoom(onRoomClose: () => void): Room {
 }
 
 const allowedFields = {
+  clientId: 'string',
   name: 'string',
   img: 'string',
   x: 'number',
